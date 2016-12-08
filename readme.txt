@@ -1,32 +1,54 @@
-=== Advanced Custom Fields: FIELD_LABEL Field ===
-Contributors: AUTHOR_NAME
-Tags: PLUGIN_TAGS
-Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: trunk
+=== Advanced Custom Fields: Button Field ===
+Contributors: circlecube, brownbagmarketing
+Tags: acf, button, link, links, custom, custom post type, integration, admin, easy, page, post, posts, pages, simple, url
+Requires at least: 4.5
+Tested up to: 4.7
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-DESCRIPTION
+Generates a button to an external url or an internal post type. Integrates with custom post types too. 
 
 == Description ==
 
-EXTENDED_DESCRIPTION
+NOTE: **This is an extension for the popular [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin. By itself, this plugin does NOTHING.** ENDNOTE
+
+Generates a nice button/link to an external url or an internal post type, similar to the page_link field but allows you to override the link text.
+
+What makes this great is reducing multiple ACF rows into just one (see screenshots for a clear visual walkthrough). The internal link also uses a dropdown which is populated from all your post types so the button can link to a media file or a Custom Post Type, or of course to a page or post.
+
+There are many advanced options as well. This will simply add classes to the button link with line up nicely with Zurb Foundation, but can easily be styled by any theme or developer to make these buttons shine. Options for color, size, style as well allowing the button to open in a new window and add custom classes on the fly.
+
+NOTE: (*I know it was already mentioned, but just to be sure there's no confusion...*) **This is an extension for the popular [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin. By itself, this plugin does NOTHING.** ENDNOTE
 
 = Compatibility =
 
 This ACF field type is compatible with:
 * ACF 5
-* ACF 4
 
 == Installation ==
 
-1. Copy the `acf-FIELD_NAME` folder into your `wp-content/plugins` folder
-2. Activate the FIELD_LABEL plugin via the plugins admin page
-3. Create a new field via ACF and select the FIELD_LABEL type
+1. Copy the `acf-button` folder into your `wp-content/plugins` folder
+2. Activate the plugin via the plugins admin page
+3. Create a new field via ACF and select the Button type
 4. Please refer to the description for more info regarding the field type settings
 
 == Changelog ==
+
+=1.5.0=
+* Update to display posts, pages & all custom post types in same select list segmented by post type.
+
+= 1.4.0 =
+* Further develop advanced settings and allow field group to fine tune the button field and default values and fields to display.
+
+= 1.3.0 =
+* Add custom settings for link type and custom post type support.
+
+= 1.2.0 =
+* Add custom settings for target, color and size.
+
+= 1.1.0 =
+* Add support for ACF 5.
 
 = 1.0.0 =
 * Initial Release.

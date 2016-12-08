@@ -1,49 +1,88 @@
 <?php
 
 /*
-Plugin Name: Advanced Custom Fields: FIELD_LABEL
+Plugin Name: Advanced Custom Fields: Button
 Plugin URI: PLUGIN_URL
-Description: DESCRIPTION
-Version: 1.0.0
-Author: AUTHOR_NAME
-Author URI: AUTHOR_URL
+Description: Adds a simple yet featured button field for ACF.
+Version: 1.4.0
+Author: Evan Mullins
+Author URI: https://circlecube.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+// exit if accessed directly
+if( ! defined( 'ABSPATH' ) ) exit;
 
 
+// check if class already exists
+if( !class_exists('acf_plugin_button') ) :
 
-// 1. set text domain
-// Reference: https://codex.wordpress.org/Function_Reference/load_plugin_textdomain
-load_plugin_textdomain( 'acf-FIELD_NAME', false, dirname( plugin_basename(__FILE__) ) . '/lang/' ); 
-
-
-
-
-// 2. Include field type for ACF5
-// $version = 5 and can be ignored until ACF6 exists
-function include_field_types_FIELD_NAME( $version ) {
+class acf_plugin_button {
 	
-	include_once('acf-FIELD_NAME-v5.php');
+	/*
+	*  __construct
+	*
+	*  This function will setup the class functionality
+	*
+	*  @type	function
+	*  @date	17/02/2016
+	*  @since	1.0.0
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
+	function __construct() {
+		
+		// vars
+		$this->settings = array(
+			'version'	=> '1.4.0',
+			'url'		=> plugin_dir_url( __FILE__ ),
+			'path'		=> plugin_dir_path( __FILE__ )
+		);
+		
+		
+		// set text domain
+		// https://codex.wordpress.org/Function_Reference/load_plugin_textdomain
+		load_plugin_textdomain( 'acf-button', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' ); 
+		
+		
+		// include field
+		add_action('acf/include_field_types', 	array($this, 'include_field_types')); // v5
+		// add_action('acf/register_fields', 		array($this, 'include_field_types')); // v4
+		
+	}
+	
+	
+	/*
+	*  include_field_types
+	*
+	*  This function will include the field type class
+	*
+	*  @type	function
+	*  @date	17/02/2016
+	*  @since	1.0.0
+	*
+	*  @param	$version (int) major ACF version. Defaults to 4
+	*  @return	n/a
+	*/
+	
+	function include_field_types( $version = 5 ) {
+		
+		// include
+		include_once('fields/acf-button-v' . $version . '.php');
+		
+	}
 	
 }
 
-add_action('acf/include_field_types', 'include_field_types_FIELD_NAME');	
+
+// initialize
+new acf_plugin_button();
 
 
-
-
-// 3. Include field type for ACF4
-function register_fields_FIELD_NAME() {
-	
-	include_once('acf-FIELD_NAME-v4.php');
-	
-}
-
-add_action('acf/register_fields', 'register_fields_FIELD_NAME');	
-
-
-
+// class_exists check
+endif;
 	
 ?>

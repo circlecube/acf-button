@@ -13,11 +13,11 @@ Generates a button to an external url or an internal post type. Integrates with 
 
 NOTE: **This is an extension for the popular [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin. By itself, this plugin does NOTHING.** ENDNOTE
 
-Generates a nice button/link to an external url or an internal post type, similar to the page_link field but allows you to override the link text.
+Generates a nice button/link to an external url or an internal post type, similar to the page_link field but allows you to override the link text and link to any post type or a custom url.
 
 What makes this great is reducing multiple ACF rows into just one (see screenshots for a clear visual walkthrough). The internal link also uses a dropdown which is populated from all your post types so the button can link to a media file or a Custom Post Type, or of course to a page or post.
 
-There are many advanced options as well. This will simply add classes to the button link with line up nicely with Zurb Foundation, but can easily be styled by any theme or developer to make these buttons shine. Options for color, size, style as well allowing the button to open in a new window and add custom classes on the fly.
+There are many advanced options as well. This will simply add classes to the button link which line up nicely with Zurb Foundation, but can easily be styled by any theme or developer to make these buttons shine. Options for color, size, style as well allowing the button to open in a new window and add custom classes on the fly.
 
 NOTE: (*I know it was already mentioned, but just to be sure there's no confusion...*) **This is an extension for the popular [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin. By itself, this plugin does NOTHING.** ENDNOTE
 

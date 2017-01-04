@@ -3,7 +3,7 @@ Contributors: circlecube, brownbagmarketing
 Tags: acf, button, link, links, custom, custom post type, integration, admin, easy, page, post, posts, pages, simple, url
 Requires at least: 4.5
 Tested up to: 4.7
-Stable tag: 1.4.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,9 @@ This ACF field type is compatible with:
 4. Please refer to the description for more info regarding the field type settings
 
 == Changelog ==
+
+=1.5.1=
+* Fix bug - now not messing with the global post or loop on setting up the internal links select list.
 
 =1.5.0=
 * Update to display posts, pages & all custom post types in same select list segmented by post type.

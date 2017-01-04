@@ -455,33 +455,33 @@ class acf_field_button extends acf_field {
 						id="<?php echo esc_attr($field['key']); ?>_post"
 				>
 				<?php	
-					global $post;
 					$post_type = '';
 				    foreach ( $myposts as $post ) {
-						setup_postdata( $post );
+				    	$this_post_type = get_post_type($post);
 
-						if ( $post_type !== get_post_type() ){
+						if ( $post_type !== $this_post_type ){
 							if ( $post_type !== '') {
 								echo '</optgroup>';
 							}
-							$post_type = get_post_type();
+							$post_type = $this_post_type;
 							echo '<optgroup label="' . get_post_type_object($post_type)->labels->name . '">';
 						}
 						
-						$this_id = get_the_ID();
-						$this_title = get_the_title();
+						$this_id = $post->ID; 
+						$this_title = get_the_title( $this_id );
 						?>
 						<option value="<?php echo $this_id; ?>" <?php if ( $field['value']['post'] == $this_id ) echo 'selected'; ?>><?php echo $this_title; ?></option>
 						<?php
+
 					}
-					wp_reset_postdata();
 				?>
 					</optgroup>
 				</select>
 			</div>
 		</div>
 		
-		<!-- <div class="acf-button-subfield acf-button-page acf-button-link">
+		
+		<?php /*<div class="acf-button-subfield acf-button-page acf-button-link">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr($field['key']) ?>_page">Page Link</label>
 			</div>
@@ -497,10 +497,10 @@ class acf_field_button extends acf_field {
 						)
 					); ?>
 			</div>
-		</div> -->
+		</div> 
 
 		<?php 
-		/*
+		
 		//loop through cpts and print out a select to link to content.
 		if ( $cpts ) {
 			foreach($cpts as $cpt) {

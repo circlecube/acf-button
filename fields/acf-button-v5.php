@@ -333,7 +333,7 @@ class acf_field_button extends acf_field {
 		
 		?>
 		<style>
-			.acf-field .acf-label label[for="acf-<?php echo esc_attr($field['key']); ?>"] { display: none; }
+			.acf-field .acf-label label[for="acf-<?php echo esc_attr($field['key']) ?>"] { display: none; }
 			.acf-field .acf-input fieldset.acf-button {
 				border: 1px solid #eee;
 				padding: .5rem 1rem 1rem;
@@ -348,20 +348,20 @@ class acf_field_button extends acf_field {
 				line-height: 18px;
 			}
 		</style>
-		<fieldset class="acf-button" id="acf-<?php echo esc_attr($field['key']); ?>" data-key="<?php echo esc_attr($field['key']); ?>">
+		<fieldset class="acf-button" id="acf-<?php echo esc_attr($field['key']) ?>" data-key="<?php echo esc_attr($field['key']) ?>">
 			
 			<legend><?php echo esc_attr($field['label']); ?></legend>
 		
 
 		<div class="acf-button-subfield acf-button-text">
 			<div class="acf-label">
-				<label for="<?php echo esc_attr($field['key']); ?>_text">Text</label>
+				<label for="<?php echo esc_attr($field['key']) ?>_text">Text</label>
 			</div>
 			<div class="acf-input">
 				<input  type="text" 
-						name="<?php echo esc_attr($field['name']); ?>[text]"
-						id="<?php echo esc_attr($field['key']); ?>_text" 
-						value="<?php echo esc_attr($field['value']['text']); ?>" 
+						name="<?php echo esc_attr($field['name']) ?>[text]"
+						id="<?php echo esc_attr($field['key']) ?>_text" 
+						value="<?php echo esc_attr($field['value']['text']) ?>" 
 				/>
 			</div>
 		</div>
@@ -371,7 +371,7 @@ class acf_field_button extends acf_field {
 
 		<?php } else { ?>
 			<style>
-				#acf-<?php echo esc_attr($field['key']); ?> .acf-button-subfield.acf-button-type {
+				#acf-<?php echo esc_attr($field['key']) ?> .acf-button-subfield.acf-button-type {
 					display: none;
 				}
 			</style>
@@ -379,8 +379,7 @@ class acf_field_button extends acf_field {
 
 		<div class="acf-button-subfield acf-button-type">
 			<div class="acf-label">
-				<label for="<?php echo esc_attr($field['key']); ?>_type">Link Type</label>
-				<p class="description">What type of link will be attached to the button? Either a custom url (used for external links) or an internal url where a content type needs to be declared.</p>
+				<label for="<?php echo esc_attr($field['key']) ?>_type">Link Type</label>
 			</div>
 			<div class="acf-input">
 				<?php 
@@ -400,41 +399,27 @@ class acf_field_button extends acf_field {
 					$cpts = get_post_types($args, 'objects');
 					if ( $cpts ) { ?>
 						<select 
-							name="<?php echo esc_attr($field['name']); ?>[type]"
-							id="<?php echo esc_attr($field['key']); ?>_type"
+							name="<?php echo esc_attr($field['name']) ?>[type]"
+							id="<?php echo esc_attr($field['key']) ?>_type"
 						>
-							<option value="custom" <?php if ( $selected == 'custom' ) echo 'selected'; ?>>External/Custom URL</option>
-							<option value="post" <?php if ( $selected == 'post' ) echo 'selected'; ?>>Select Internal Post</option>
-							<!-- <option value="page" <?php if ( $selected == 'page' ) echo 'selected'; ?>>Page</option>
+							<option value="custom" <?php if ( $selected == 'custom' ) echo 'selected'; ?>>Custom URL</option>
+							<option value="page" <?php if ( $selected == 'page' ) echo 'selected'; ?>>Page</option>
+							<option value="post" <?php if ( $selected == 'post' ) echo 'selected'; ?>>Post</option>
 							<optgroup label="Custom Post Types">
 							<?php foreach($cpts as $cpt) {
 								if ( !in_array( $cpt->name, $ignore ) ) { //exclude the field type of ACF ?>
 									<option value="<?php echo $cpt->name; ?>" <?php if ($selected == $cpt->name) echo 'selected'; ?>><?php echo $cpt->label; ?></option>
 								<?php }
 							}?>
-							</optgroup> -->
+							</optgroup>
 						</select>
 					<?php } ?>
 			</div>
 		</div>
-		<?php 
-		$posttypes = [];
-		$ignore = array(
-			'attachment',
-			'acf-field', 
-			'acf-field-group'
-		);
-		foreach($cpts as $cpt) {
-			if ( !in_array( $cpt->name, $ignore ) ) { //exclude
-				$posttypes[] = $cpt->name;
-			}
-		}
 
-		?>
 		<div class="acf-button-subfield acf-button-post acf-button-link">
 			<div class="acf-label">
-				<label for="<?php echo esc_attr($field['key']); ?>_post">Post Link</label>
-				<p class="description"><?php //var_dump( $cpts ); ?></p>
+				<label for="<?php echo esc_attr($field['key']) ?>_post">Post Link</label>
 			</div>
 			<div class="acf-input">
 				<?php 
@@ -442,47 +427,33 @@ class acf_field_button extends acf_field {
 
 				// query arguments
 				$args = array (
-					// 'post_type'              => 'post',
-					'post_type'              => $posttypes,
+					'post_type'              => 'post',
 					'posts_per_page'         => '-1',
 					'order'                  => 'ASC',
-					'orderby'                => 'type title',
+					'orderby'                => 'title',
 				);
-				$myposts = get_posts( $args );
+				$posts = get_posts( $args );
 
 				?>
 				<select 
-						name="<?php echo esc_attr($field['name']); ?>[post]"
-						id="<?php echo esc_attr($field['key']); ?>_post"
+						name="<?php echo esc_attr($field['name']) ?>[post]"
+						id="<?php echo esc_attr($field['key']) ?>_post"
 				>
-				<?php	
-					$post_type = '';
-				    foreach ( $myposts as $post ) {
-				    	$this_post_type = get_post_type($post);
-
-						if ( $post_type !== $this_post_type ){
-							if ( $post_type !== '') {
-								echo '</optgroup>';
-							}
-							$post_type = $this_post_type;
-							echo '<optgroup label="' . get_post_type_object($post_type)->labels->name . '">';
-						}
+				<?php	foreach ( $posts as $post ) {
+						setup_postdata( $post );
 						
-						$this_id = $post->ID; 
-						$this_title = get_the_title( $this_id );
+						$this_id = get_the_id();
+						$this_title = get_the_title();
 						?>
 						<option value="<?php echo $this_id; ?>" <?php if ( $field['value']['post'] == $this_id ) echo 'selected'; ?>><?php echo $this_title; ?></option>
 						<?php
+					} ?>
 
-					}
-				?>
-					</optgroup>
 				</select>
 			</div>
 		</div>
 		
-		
-		<?php /*<div class="acf-button-subfield acf-button-page acf-button-link">
+		<div class="acf-button-subfield acf-button-page acf-button-link">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr($field['key']) ?>_page">Page Link</label>
 			</div>
@@ -498,10 +469,9 @@ class acf_field_button extends acf_field {
 						)
 					); ?>
 			</div>
-		</div> 
+		</div>
 
 		<?php 
-		
 		//loop through cpts and print out a select to link to content.
 		if ( $cpts ) {
 			foreach($cpts as $cpt) {
@@ -539,16 +509,13 @@ class acf_field_button extends acf_field {
 									?>
 									<option value="<?php echo $this_id; ?>" <?php if ( $field['value'][$cpt->name] == $this_id ) echo 'selected'; ?>><?php echo $this_title; ?></option>
 									<?php
-								}
-								wp_reset_postdata();
-								?>
+								} ?>
 							</select>
 						</div>
 					</div><?php
 				}
 			}
 		}
-		*/
 		?>
 
 		<div class="acf-button-subfield acf-button-link acf-button-url">
@@ -659,7 +626,6 @@ class acf_field_button extends acf_field {
 			<div class="acf-button-subfield acf-button-target">
 				<div class="acf-label">
 					<label for="<?php echo esc_attr($field['name']) ?>[target]">Target</label>
-					<p class="description">Open this button link in the same window (tab) or open a new one? Internal links usually open in the same window, while external links externally.</p>
 				</div>
 				<div class="acf-input">
 					<select 
@@ -668,10 +634,9 @@ class acf_field_button extends acf_field {
 					>
 						<option value="">Open in same window</option>
 						<option value="_blank" <?php if ( $field['value']['target'] == '_blank' ) echo 'selected'; 
-							?>>Open in new window (target="_blank")</option>
+							?>>Open in new window</option>
 					</select>
 				</div>
-
 			</div>
 
 		<?php } else { ?>

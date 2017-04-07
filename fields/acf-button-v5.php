@@ -177,7 +177,7 @@ class acf_field_button extends acf_field {
 			'choices'		=> array(
 				'tiny'		=> __("Tiny",'acf-button'),
 				'small'		=> __("Small",'acf-button'),
-				''	=> __("Normal",'acf-button'),
+				''			=> __("Normal",'acf-button'),
 				'large'		=> __("Large",'acf-button'),
 				'huge'		=> __("Huge",'acf-button'),
 			)
@@ -189,11 +189,12 @@ class acf_field_button extends acf_field {
 			'type'			=> 'select',
 			'name'			=> 'default_style',
 			'choices'		=> array(
-				''	=> __("Normal",'acf-button'),
+				''			=> __("Normal",'acf-button'),
 				'expanded'	=> __("Expanded",'acf-button'),
 				'hollow'	=> __("Hollow",'acf-button'),
 				'round'		=> __("Round",'acf-button'),
-				'radius'	=> __("Radius",'acf-button')
+				'radius'	=> __("Radius",'acf-button'),
+				'text'		=> __("Text", 'acf-button')
 			)
 		));
 
@@ -644,6 +645,8 @@ class acf_field_button extends acf_field {
 							?>>Round</option>
 						<option value="radius" <?php if ( $field['value']['style'] == 'radius' ) echo 'selected'; 
 							?>>Radius</option>
+						<option value="text" <?php if ( $field['value']['style'] == 'text' ) echo 'selected'; 
+							?>>Text</option>
 					</select>
 				</div>
 			</div>

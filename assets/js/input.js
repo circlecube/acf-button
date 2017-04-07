@@ -10,7 +10,7 @@
 
 		//add listeners for field visibility
 		//toggle url field with page link value = null
-		$('select#' + id + '_type').on('change blur', function(e){
+		$('select#' + id + '_type').on('change blur load', function(e){
 			var id = $(this).parents('.acf-field-button').attr('data-key');
 			var selected_val = $(this).val();
 			// console.log('selected', id, selected_val );

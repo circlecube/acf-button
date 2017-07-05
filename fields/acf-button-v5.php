@@ -402,24 +402,38 @@ class acf_field_button extends acf_field {
 							name="<?php echo esc_attr($field['name']); ?>[type]"
 							id="<?php echo esc_attr($field['key']); ?>_type"
 						>
-							<option value="post" <?php if ( $selected == 'post' ) echo 'selected'; ?>>Post</option>
 							<option value="custom" <?php if ( $selected == 'custom' ) echo 'selected'; ?>>External/Custom URL</option>
 							<option value="post" <?php if ( $selected != 'custom' ) echo 'selected'; ?>>Select Internal Post</option>
+							<!-- <option value="page" <?php if ( $selected == 'page' ) echo 'selected'; ?>>Page</option>
 							<optgroup label="Custom Post Types">
 							<?php foreach($cpts as $cpt) {
 								if ( !in_array( $cpt->name, $ignore ) ) { //exclude the field type of ACF ?>
 									<option value="<?php echo $cpt->name; ?>" <?php if ($selected == $cpt->name) echo 'selected'; ?>><?php echo $cpt->label; ?></option>
 								<?php }
 							}?>
-							</optgroup>
+							</optgroup> -->
 						</select>
 					<?php } ?>
 			</div>
 		</div>
+		<?php 
+		$posttypes = [];
+		$ignore = array(
+			'attachment',
+			'acf-field', 
+			'acf-field-group'
+		);
+		foreach($cpts as $cpt) {
+			if ( !in_array( $cpt->name, $ignore ) ) { //exclude
+				$posttypes[] = $cpt->name;
+			}
+		}
 
+		?>
 		<div class="acf-button-subfield acf-button-post acf-button-link">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr($field['key']); ?>_post">Post Link</label>
+				<p class="description"><?php //var_dump( $cpts ); ?></p>
 			</div>
 			<div class="acf-input">
 				<?php 
@@ -427,33 +441,48 @@ class acf_field_button extends acf_field {
 
 				// query arguments
 				$args = array (
-					'post_type'              => 'post',
+					// 'post_type'              => 'post',
+					'post_type'              => $posttypes,
 					'posts_per_page'         => '-1',
 					'order'                  => 'ASC',
-					'orderby'                => 'title',
+					'orderby'                => 'type title',
 				);
-				$posts = get_posts( $args );
+				$myposts = get_posts( $args );
 
 				?>
 				<select 
-						name="<?php echo esc_attr($field['name']) ?>[post]"
-						id="<?php echo esc_attr($field['key']) ?>_post"
+						name="<?php echo esc_attr($field['name']); ?>[post]"
+						id="<?php echo esc_attr($field['key']); ?>_post"
 				>
-				<?php	foreach ( $posts as $post ) {
-						setup_postdata( $post );
+				<?php	
+					$post_type = '';
+				    foreach ( $myposts as $post ) {
+				    	$this_post_type = get_post_type($post);
+
+						if ( $post_type !== $this_post_type ){
+							if ( $post_type !== '') {
+								echo '</optgroup>';
+							}
+							$post_type = $this_post_type;
+							echo '<optgroup label="' . get_post_type_object($post_type)->labels->name . '">';
+						}
 						
-						$this_id = get_the_id();
-						$this_title = get_the_title();
+						$this_id = $post->ID; 
+						$this_title = get_the_title( $this_id );
 						?>
 						<option value="<?php echo $this_id; ?>" <?php if ( $field['value']['post'] == $this_id ) echo 'selected'; ?>><?php echo $this_title; ?></option>
 						<?php
-					} ?>
 
+					}
+				?>
+					</optgroup>
 				</select>
 			</div>
 		</div>
 		
-		<div class="acf-button-subfield acf-button-page acf-button-link">
+		
+		<?php /* Comment out the CPT selects ?>
+			<div class="acf-button-subfield acf-button-page acf-button-link">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr($field['key']) ?>_page">Page Link</label>
 			</div>
@@ -469,9 +498,10 @@ class acf_field_button extends acf_field {
 						)
 					); ?>
 			</div>
-		</div>
+		</div> 
 
 		<?php 
+		
 		//loop through cpts and print out a select to link to content.
 		if ( $cpts ) {
 			foreach($cpts as $cpt) {
@@ -509,13 +539,16 @@ class acf_field_button extends acf_field {
 									?>
 									<option value="<?php echo $this_id; ?>" <?php if ( $field['value'][$cpt->name] == $this_id ) echo 'selected'; ?>><?php echo $this_title; ?></option>
 									<?php
-								} ?>
+								}
+								wp_reset_postdata();
+								?>
 							</select>
 						</div>
 					</div><?php
 				}
 			}
 		}
+		*/
 		?>
 
 		<div class="acf-button-subfield acf-button-link acf-button-url">

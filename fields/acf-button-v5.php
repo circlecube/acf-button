@@ -193,8 +193,7 @@ class acf_field_button extends acf_field {
 				'expanded'	=> __("Expanded",'acf-button'),
 				'hollow'	=> __("Hollow",'acf-button'),
 				'round'		=> __("Round",'acf-button'),
-				'radius'	=> __("Radius",'acf-button'),
-				'text'		=> __("Text", 'acf-button')
+				'radius'	=> __("Radius",'acf-button')
 			)
 		));
 

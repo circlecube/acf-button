@@ -695,8 +695,8 @@ class acf_field_button extends acf_field {
 		
 		
 		// register & include CSS
-		// wp_register_style( 'acf-input-button', "{$url}assets/css/input.css", array('acf-input'), $version );
-		// wp_enqueue_style('acf-input-button');
+		wp_register_style( 'acf-input-button', "{$url}assets/css/input.css", array('acf-input'), $version );
+		wp_enqueue_style('acf-input-button');
 		
 	}
 	

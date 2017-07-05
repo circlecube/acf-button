@@ -38,6 +38,7 @@ This ACF field type is compatible with:
 =1.6=
 * Combine all internal post types into one grouped select list.
 * Fix collapse bug. Hides some fields when button is collapsed (in admin).
+* Fix bug where selecting a different link type alters all buttons on page.
 * Other minor issues.
 
 =1.5.1=

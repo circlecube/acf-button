@@ -7,7 +7,6 @@
 		// console.log('button field initialized', $el);
 		// console.log('button field id', id);
 
-
 		//add listeners for field visibility
 		//toggle url field with page link value = null
 		$('select#' + id + '_type').on('change blur load', function(e){
@@ -15,17 +14,14 @@
 			var selected_val = $(this).val();
 			// console.log('selected', id, selected_val );
 
-			$url_group = $('#acf-' + id + ' .acf-button-url');
-			// $url_field = $('#acf-' + id + ' .acf-button-url input');
-
 			switch ( selected_val ) {
 				case 'custom':
-					$('#acf-' + id + ' .acf-button-link').hide();
-					$('#acf-' + id + ' .acf-button-url').show();
+					$(this).parents('.acf-field-button').find('.acf-button-link').hide();
+					$(this).parents('.acf-field-button').find('.acf-button-url').show();
 					break;
-				default:
-					$('#acf-' + id + ' .acf-button-link').hide();
-					$('#acf-' + id + ' .acf-button-' + selected_val).show();
+				default: // != custom
+					$(this).parents('.acf-field-button').find('.acf-button-link').hide();
+					$(this).parents('.acf-field-button').find('.acf-button-' + selected_val).show();
 			}
 
 		}).blur();

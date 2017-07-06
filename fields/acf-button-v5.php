@@ -347,10 +347,9 @@ class acf_field_button extends acf_field {
 				line-height: 18px;
 			}
 		</style>
-		<fieldset class="acf-button" id="acf-<?php echo esc_attr($field['key']); ?>" data-key="<?php echo esc_attr($field['key']); ?>">
+		<div class="acf-button" id="acf-<?php echo esc_attr($field['key']); ?>" data-key="<?php echo esc_attr($field['key']); ?>">
 			
-			<legend><?php echo esc_attr($field['label']); ?></legend>
-		
+			<!-- <div class="acf-label"><label><?php echo esc_attr($field['label']); ?></label></div> -->		
 
 		<div class="acf-button-subfield acf-button-text">
 			<div class="acf-label">
@@ -379,7 +378,7 @@ class acf_field_button extends acf_field {
 		<div class="acf-button-subfield acf-button-type">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr($field['key']); ?>_type">Link Type</label>
-				<p class="description">What type of link will be attached to the button? Either a custom url (used for external links) or an internal url where a content type needs to be declared.</p>
+				<p class="description">What type of content will the button link to?</p>
 			</div>
 			<div class="acf-input">
 				<?php 
@@ -402,8 +401,8 @@ class acf_field_button extends acf_field {
 							name="<?php echo esc_attr($field['name']); ?>[type]"
 							id="<?php echo esc_attr($field['key']); ?>_type"
 						>
-							<option value="custom" <?php if ( $selected == 'custom' ) echo 'selected'; ?>>External/Custom URL</option>
-							<option value="post" <?php if ( $selected != 'custom' ) echo 'selected'; ?>>Select Internal Post</option>
+							<option value="custom" <?php if ( $selected == 'custom' ) echo 'selected'; ?>>Link to URL</option>
+							<option value="post" <?php if ( $selected != 'custom' ) echo 'selected'; ?>>Link to WordPress Content</option>
 							<!-- <option value="page" <?php if ( $selected == 'page' ) echo 'selected'; ?>>Page</option>
 							<optgroup label="Custom Post Types">
 							<?php foreach($cpts as $cpt) {
@@ -657,7 +656,6 @@ class acf_field_button extends acf_field {
 			<div class="acf-button-subfield acf-button-target">
 				<div class="acf-label">
 					<label for="<?php echo esc_attr($field['name']) ?>[target]">Target</label>
-					<p class="description">Open this button link in the same window (tab) or open a new one? Internal links usually open in the same window, while external links externally.</p>
 				</div>
 				<div class="acf-input">
 					<select 
@@ -666,7 +664,7 @@ class acf_field_button extends acf_field {
 					>
 						<option value="">Open in same window</option>
 						<option value="_blank" <?php if ( $field['value']['target'] == '_blank' ) echo 'selected'; 
-							?>>Open in new window (target="_blank")</option>
+							?>>Open in new window/tab (target="_blank")</option>
 					</select>
 				</div>
 
@@ -692,7 +690,7 @@ class acf_field_button extends acf_field {
 
 		<?php } ?>
 
-		</fieldset>
+		</div>
 		<?php
 
 

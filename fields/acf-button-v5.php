@@ -721,12 +721,12 @@ class acf_field_button extends acf_field {
 		
 		
 		// register & include JS
-		wp_register_script( 'acf-input-button', "{$url}assets/js/input.js", array('acf-input'), $version );
+		wp_register_script( 'acf-input-button', "{$url}js/input.js", array('acf-input'), $version );
 		wp_enqueue_script('acf-input-button');
 		
 		
 		// register & include CSS
-		wp_register_style( 'acf-input-button', "{$url}assets/css/input.css", array('acf-input'), $version );
+		wp_register_style( 'acf-input-button', "{$url}css/input.css", array('acf-input'), $version );
 		wp_enqueue_style('acf-input-button');
 		
 	}

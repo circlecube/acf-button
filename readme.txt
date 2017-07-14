@@ -25,7 +25,7 @@ NOTE: (*I know it was already mentioned, but just to be sure there's no confusio
 = Compatibility =
 
 This ACF field type is compatible with:
-* ACF 5
+ * ACF 5
 
 = Roadmap =
 
@@ -43,7 +43,7 @@ This ACF field type is compatible with:
 == Changelog ==
 
 = 1.6.1 =
-* Include a missing asseet file.
+* Include a missing asset files, since they were in the assets dir. Add thumbnail and banner assets.
 
 = 1.6 =
 * Combine all internal post types into one grouped select list.

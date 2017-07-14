@@ -6,6 +6,7 @@ Tested up to: 4.8
 Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+GitHub Plugin URI: https://github.com/Bag-Labs/acf-button
 
 Generates a button to an external url or an internal post type. Integrates with custom post types too. 
 

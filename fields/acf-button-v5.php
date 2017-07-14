@@ -353,12 +353,12 @@ class acf_field_button extends acf_field {
 
 		<div class="acf-button-subfield acf-button-text">
 			<div class="acf-label">
-				<label for="<?php echo esc_attr($field['key']); ?>_text">Text</label>
+				<label for="<?php echo esc_attr($field['name']); ?>_text">Text</label>
 			</div>
 			<div class="acf-input">
 				<input  type="text" 
 						name="<?php echo esc_attr($field['name']); ?>[text]"
-						id="<?php echo esc_attr($field['key']); ?>_text" 
+						id="<?php echo esc_attr($field['name']); ?>_text" 
 						value="<?php echo esc_attr($field['value']['text']); ?>" 
 				/>
 			</div>

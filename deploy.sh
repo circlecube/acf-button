@@ -4,9 +4,9 @@
 ###
 # Steps
 # Update version numbers in
-#	• /readme.txt line 7
+#	• /readme.txt line 6
+#	• /acf-button.php line 7
 #	• /acf-button.php line 19
-#	• /includes/acf-button.php line 67
 # Commit
 # terminal cd to plugin: /Users/emullins/www/local.plugins.com/app/public/wp-content/plugins/acf-button/
 # terminal run command: sh deploy.sh (hit enter 6 times, y, enter)

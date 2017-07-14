@@ -1,11 +1,12 @@
 === Advanced Custom Fields: Button Field ===
 Contributors: circlecube, brownbagmarketing
-Tags: acf, button, link, links, custom, custom post type, integration, admin, easy, page, post, posts, pages, simple, url
+Tags: acf, button, link, custom, custom post type, page, post, posts, pages, url
 Requires at least: 4.5
-Tested up to: 4.7
-Stable tag: 1.6
+Tested up to: 4.8
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+GitHub Plugin URI: https://github.com/Bag-Labs/acf-button
 
 Generates a button to an external url or an internal post type. Integrates with custom post types too. 
 
@@ -24,7 +25,13 @@ NOTE: (*I know it was already mentioned, but just to be sure there's no confusio
 = Compatibility =
 
 This ACF field type is compatible with:
-* ACF 5
+ * ACF 5
+
+= Roadmap =
+
+* Add option to add bootstrap styles to buttons
+* Add some button styles for users that don't have any and give an opt out of using button css
+* Easily link to media library items for download
 
 == Installation ==
 
@@ -35,16 +42,19 @@ This ACF field type is compatible with:
 
 == Changelog ==
 
-=1.6=
+= 1.6.1 =
+* Include a missing asset files, since they were in the assets dir. Add thumbnail and banner assets.
+
+= 1.6 =
 * Combine all internal post types into one grouped select list.
 * Fix collapse bug. Hides some fields when button is collapsed (in admin).
 * Fix bug where selecting a different link type alters all buttons on page.
 * Other minor issues.
 
-=1.5.1=
+= 1.5.1 =
 * Fix bug - now not messing with the global post or loop on setting up the internal links select list.
 
-=1.5.0=
+= 1.5.0 =
 * Update to display posts, pages & all custom post types in same select list segmented by post type.
 
 = 1.4.0 =
@@ -57,7 +67,7 @@ This ACF field type is compatible with:
 * Add custom settings for target, color and size.
 
 = 1.1.0 =
-* Add support for ACF 5.
+* Add support for ACF 5. (and drop for ACF4)
 
 = 1.0.0 =
 * Initial Release.

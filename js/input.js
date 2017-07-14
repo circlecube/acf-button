@@ -2,8 +2,30 @@
 	
 	
 	function initialize_field( $el ) {
-		
-		//$el.doStuff();
+		var id = $el.attr('data-key');
+		// $el.doStuff();
+		// console.log('button field initialized', $el);
+		// console.log('button field id', id);
+
+		//add listeners for field visibility
+		//toggle url field with page link value = null
+		$('select#' + id + '_type').on('change blur load', function(e){
+			var id = $(this).parents('.acf-field-button').attr('data-key');
+			var selected_val = $(this).val();
+			// console.log('selected', id, selected_val );
+
+			switch ( selected_val ) {
+				case 'custom':
+					$(this).parents('.acf-field-button').find('.acf-button-link').hide();
+					$(this).parents('.acf-field-button').find('.acf-button-url').show();
+					break;
+				default: // != custom
+					$(this).parents('.acf-field-button').find('.acf-button-link').hide();
+					$(this).parents('.acf-field-button').find('.acf-button-' + selected_val).show();
+			}
+
+		}).blur();
+		//set initial states based on values by triggering a blur on select
 		
 	}
 	
@@ -26,10 +48,11 @@
 		
 		acf.add_action('ready append', function( $el ){
 			
-			// search $el for fields of type 'FIELD_NAME'
-			acf.get_fields({ type : 'FIELD_NAME'}, $el).each(function(){
+			// search $el for fields of type 'button'
+			acf.get_fields({ type : 'button'}, $el).each(function(){
 				
 				initialize_field( $(this) );
+
 				
 			});
 			
@@ -54,9 +77,9 @@
 		*  @return	n/a
 		*/
 		
-		$(document).live('acf/setup_fields', function(e, postbox){
+		$(document).on('acf/setup_fields', function(e, postbox){
 			
-			$(postbox).find('.field[data-field_type="FIELD_NAME"]').each(function(){
+			$(postbox).find('.field[data-field_type="button"]').each(function(){
 				
 				initialize_field( $(this) );
 				

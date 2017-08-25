@@ -198,29 +198,29 @@ class acf_field_button extends acf_field {
 		));
 
 		$type_choices = array(
-				'custom'	=> __("Custom URL",'acf-button'),
-				'page'		=> __("Page",'acf-button'),
-				'post'		=> __("Post",'acf-button')
+				'custom'	=> __("Link to URL",'acf-button'),
+				// 'page'		=> __("Page",'acf-button'),
+				'post'		=> __("Link to WordPress Content",'acf-button')
 		);
-		$args = array(
-		   'public'   => true,
-		   '_builtin' => false
-		);
-		$ignore = array(
-			'page',
-			'post',
-			'attachment',
-			'acf-field', 
-			'acf-field-group'
-		);
-		$cpts = get_post_types($args, 'objects');
-		if ( $cpts ) { 
-			foreach($cpts as $cpt) {
-				$name = $cpt->name;
-				$label = $cpt->label;
-				$type_choices[$name] = $label;
-			}
-		}
+		// $args = array(
+		//    'public'   => true,
+		//    '_builtin' => false
+		// );
+		// $ignore = array(
+		// 	'page',
+		// 	'post',
+		// 	'attachment',
+		// 	'acf-field', 
+		// 	'acf-field-group'
+		// );
+		// $cpts = get_post_types($args, 'objects');
+		// if ( $cpts ) { 
+		// 	foreach($cpts as $cpt) {
+		// 		$name = $cpt->name;
+		// 		$label = $cpt->label;
+		// 		$type_choices[$name] = $label;
+		// 	}
+		// }
 
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Type','acf-button'),

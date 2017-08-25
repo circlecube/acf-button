@@ -365,7 +365,10 @@ class acf_field_button extends acf_field {
 		</div>
 		
 		
-		<?php if ( in_array('type', $field['allow_advanced'] ) ) { ?>
+		<?php if (  is_array( $field['allow_advanced'] ) && 
+					in_array('type', $field['allow_advanced'] ) ||
+					'type' === $field['allow_advanced']
+		 ) { ?>
 
 		<?php } else { ?>
 			<style>

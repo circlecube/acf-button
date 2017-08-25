@@ -570,7 +570,9 @@ class acf_field_button extends acf_field {
 			</div>
 		</div>
 
-		<?php if ( in_array('color', $field['allow_advanced'] ) ) { ?>
+		<?php if (  is_array( $field['allow_advanced'] ) && 
+					in_array('color', $field['allow_advanced'] ) ||
+					'color' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-color">
 				<div class="acf-label">
@@ -601,8 +603,10 @@ class acf_field_button extends acf_field {
 
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[color]" value="<?php echo esc_attr($field['value']['color']); ?>" />
-
-		<?php } if ( in_array('size', $field['allow_advanced'] ) ) { ?>
+		
+		<?php } if (	is_array( $field['allow_advanced'] ) && 
+						in_array('size', $field['allow_advanced'] ) ||
+						'size' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-size">
 				<div class="acf-label">
@@ -630,7 +634,9 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[size]" value="<?php echo esc_attr($field['value']['size']); ?>" />
 
-		<?php } if ( in_array('style', $field['allow_advanced'] ) ) { ?>
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('style', $field['allow_advanced'] ) ||
+							'style' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-style">
 				<div class="acf-label">
@@ -658,8 +664,10 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[style]" value="<?php echo esc_attr($field['value']['style']); ?>" />
 
-		<?php } if ( in_array('target', $field['allow_advanced'] ) ) { ?>
-			
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('target', $field['allow_advanced'] ) ||
+							'target' === $field['allow_advanced'] ) { ?>
+
 			<div class="acf-button-subfield acf-button-target">
 				<div class="acf-label">
 					<label for="<?php echo esc_attr($field['name']) ?>[target]">Target</label>
@@ -680,7 +688,9 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[target]" value="<?php echo esc_attr($field['value']['target']); ?>" />
 		
-		<?php } if ( in_array('class', $field['allow_advanced'] ) ) { ?>
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('class', $field['allow_advanced'] ) ||
+							'class' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-class">
 				<div class="acf-label">

@@ -423,7 +423,7 @@ class acf_field_button extends acf_field {
 			</div>
 		</div>
 		<?php 
-		$posttypes = [];
+		$posttypes = array();
 		$ignore = array(
 			'attachment',
 			'acf-field', 

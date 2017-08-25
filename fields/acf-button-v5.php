@@ -198,29 +198,29 @@ class acf_field_button extends acf_field {
 		));
 
 		$type_choices = array(
-				'custom'	=> __("Custom URL",'acf-button'),
-				'page'		=> __("Page",'acf-button'),
-				'post'		=> __("Post",'acf-button')
+				'custom'	=> __("Link to URL",'acf-button'),
+				// 'page'		=> __("Page",'acf-button'),
+				'post'		=> __("Link to WordPress Content",'acf-button')
 		);
-		$args = array(
-		   'public'   => true,
-		   '_builtin' => false
-		);
-		$ignore = array(
-			'page',
-			'post',
-			'attachment',
-			'acf-field', 
-			'acf-field-group'
-		);
-		$cpts = get_post_types($args, 'objects');
-		if ( $cpts ) { 
-			foreach($cpts as $cpt) {
-				$name = $cpt->name;
-				$label = $cpt->label;
-				$type_choices[$name] = $label;
-			}
-		}
+		// $args = array(
+		//    'public'   => true,
+		//    '_builtin' => false
+		// );
+		// $ignore = array(
+		// 	'page',
+		// 	'post',
+		// 	'attachment',
+		// 	'acf-field', 
+		// 	'acf-field-group'
+		// );
+		// $cpts = get_post_types($args, 'objects');
+		// if ( $cpts ) { 
+		// 	foreach($cpts as $cpt) {
+		// 		$name = $cpt->name;
+		// 		$label = $cpt->label;
+		// 		$type_choices[$name] = $label;
+		// 	}
+		// }
 
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Type','acf-button'),
@@ -265,74 +265,78 @@ class acf_field_button extends acf_field {
 		
 		
 		//set defaults if values do not yet exist
-		if ( !isset( $field['value']['text'] ) ) {
-			if ( isset( $field['default_text'] ) ) {
-				$field['value']['text'] = $field['default_text'];
-			} else {
-				$field['value']['text'] = '';
+		if ( isset( $field['value'] ) ) {
+			if ( !isset( $field['value']['text'] ) ) {
+				if ( isset( $field['default_text'] ) && $field['default_text'] !== '' ) {
+					$field['value']['text'] = $field['default_text'];
+				} else {
+					$field['value']['text'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['page'] ) ) {
-			$field['value']['page'] = '';
-		}
-		if ( !isset( $field['value']['post'] ) ) {
-			$field['value']['post'] = '';
-		}
-		if ( !isset( $field['value']['media'] ) ) {
-			$field['value']['media'] = '';
-		}
-		if ( !isset( $field['value']['url'] ) ) {
-			if ( isset( $field['default_url'] ) ) {
-				$field['value']['url'] = $field['default_url'];
-			} else {
-				$field['value']['url'] = '';
+			if ( !isset( $field['value']['page'] ) ) {
+				$field['value']['page'] = '';
 			}
-		}
-		if ( !isset( $field['value']['target'] ) ) {
-			if ( isset( $field['default_target'] ) ) {
-				$field['value']['target'] = $field['default_target'];
-			} else {
-				$field['value']['target'] = '';
+			if ( !isset( $field['value']['post'] ) ) {
+				$field['value']['post'] = '';
 			}
-		}
-		if ( !isset( $field['value']['color'] ) ) {
-			if ( isset( $field['default_color'] ) ) {
-				$field['value']['color'] = $field['default_color'];
-			} else {
-				$field['value']['color'] = '';
+			if ( !isset( $field['value']['media'] ) ) {
+				$field['value']['media'] = '';
 			}
-		}
-		if ( !isset( $field['value']['size'] ) ) {
-			if ( isset( $field['default_size'] ) ) {
-				$field['value']['size'] = $field['default_size'];
-			} else {
-				$field['value']['size'] = '';
+			if ( !isset( $field['value']['url'] ) ) {
+				if ( isset( $field['default_url'] ) ) {
+					$field['value']['url'] = $field['default_url'];
+				} else {
+					$field['value']['url'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['style'] ) ) {
-			if ( isset( $field['default_style'] ) ) {
-				$field['value']['style'] = $field['default_style'];
-			} else {
-				$field['value']['style'] = '';
+			if ( !isset( $field['value']['target'] ) ) {
+				if ( isset( $field['default_target'] ) ) {
+					$field['value']['target'] = $field['default_target'];
+				} else {
+					$field['value']['target'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['class'] ) ) {
-			$field['value']['class'] = '';
-		}
-		if ( !isset( $field['value']['page_link'] ) ) {
-			$field['value']['page_link'] = '';
-		}
-		if ( !isset( $field['value']['type'] ) ) {
-			if ( isset( $field['default_type'] ) ) {
-				$field['value']['type'] = $field['default_type'];
-			} else {
-				$field['value']['type'] = 'page';
+			if ( !isset( $field['value']['color'] ) ) {
+				if ( isset( $field['default_color'] ) ) {
+					$field['value']['color'] = $field['default_color'];
+				} else {
+					$field['value']['color'] = '';
+				}
+			}
+			if ( !isset( $field['value']['size'] ) ) {
+				if ( isset( $field['default_size'] ) ) {
+					$field['value']['size'] = $field['default_size'];
+				} else {
+					$field['value']['size'] = '';
+				}
+			}
+			if ( !isset( $field['value']['style'] ) ) {
+				if ( isset( $field['default_style'] ) ) {
+					$field['value']['style'] = $field['default_style'];
+				} else {
+					$field['value']['style'] = '';
+				}
+			}
+			if ( !isset( $field['value']['class'] ) ) {
+				$field['value']['class'] = '';
+			}
+			if ( !isset( $field['value']['page_link'] ) ) {
+				$field['value']['page_link'] = '';
+			}
+			if ( !isset( $field['value']['type'] ) ) {
+				if ( isset( $field['default_type'] ) ) {
+					$field['value']['type'] = $field['default_type'];
+				} else {
+					$field['value']['type'] = 'page';
+				}
 			}
 		}
 		
 		?>
 		<style>
+			/*
 			.acf-field .acf-label label[for="acf-<?php echo esc_attr($field['key']); ?>"] { display: none; }
+			*/
 			.acf-field .acf-input fieldset.acf-button {
 				border: 1px solid #eee;
 				padding: .5rem 1rem 1rem;
@@ -365,7 +369,10 @@ class acf_field_button extends acf_field {
 		</div>
 		
 		
-		<?php if ( in_array('type', $field['allow_advanced'] ) ) { ?>
+		<?php if (  is_array( $field['allow_advanced'] ) && 
+					in_array('type', $field['allow_advanced'] ) ||
+					'type' === $field['allow_advanced']
+		 ) { ?>
 
 		<?php } else { ?>
 			<style>
@@ -416,7 +423,7 @@ class acf_field_button extends acf_field {
 			</div>
 		</div>
 		<?php 
-		$posttypes = [];
+		$posttypes = array();
 		$ignore = array(
 			'attachment',
 			'acf-field', 
@@ -563,7 +570,9 @@ class acf_field_button extends acf_field {
 			</div>
 		</div>
 
-		<?php if ( in_array('color', $field['allow_advanced'] ) ) { ?>
+		<?php if (  is_array( $field['allow_advanced'] ) && 
+					in_array('color', $field['allow_advanced'] ) ||
+					'color' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-color">
 				<div class="acf-label">
@@ -594,8 +603,10 @@ class acf_field_button extends acf_field {
 
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[color]" value="<?php echo esc_attr($field['value']['color']); ?>" />
-
-		<?php } if ( in_array('size', $field['allow_advanced'] ) ) { ?>
+		
+		<?php } if (	is_array( $field['allow_advanced'] ) && 
+						in_array('size', $field['allow_advanced'] ) ||
+						'size' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-size">
 				<div class="acf-label">
@@ -623,7 +634,9 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[size]" value="<?php echo esc_attr($field['value']['size']); ?>" />
 
-		<?php } if ( in_array('style', $field['allow_advanced'] ) ) { ?>
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('style', $field['allow_advanced'] ) ||
+							'style' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-style">
 				<div class="acf-label">
@@ -651,8 +664,10 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[style]" value="<?php echo esc_attr($field['value']['style']); ?>" />
 
-		<?php } if ( in_array('target', $field['allow_advanced'] ) ) { ?>
-			
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('target', $field['allow_advanced'] ) ||
+							'target' === $field['allow_advanced'] ) { ?>
+
 			<div class="acf-button-subfield acf-button-target">
 				<div class="acf-label">
 					<label for="<?php echo esc_attr($field['name']) ?>[target]">Target</label>
@@ -673,7 +688,9 @@ class acf_field_button extends acf_field {
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr($field['name']) ?>[target]" value="<?php echo esc_attr($field['value']['target']); ?>" />
 		
-		<?php } if ( in_array('class', $field['allow_advanced'] ) ) { ?>
+			<?php } if (	is_array( $field['allow_advanced'] ) && 
+							in_array('class', $field['allow_advanced'] ) ||
+							'class' === $field['allow_advanced'] ) { ?>
 
 			<div class="acf-button-subfield acf-button-class">
 				<div class="acf-label">

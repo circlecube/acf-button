@@ -145,6 +145,7 @@ echo "Ignoring GitHub specific files"
 svn propset svn:ignore "README.md
 Thumbs.db
 .git
+deploy.sh
 .gitignore" "$SVNPATH/trunk/"
 
 echo "Exporting the HEAD of master from git to the trunk of SVN"

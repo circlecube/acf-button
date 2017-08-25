@@ -334,7 +334,9 @@ class acf_field_button extends acf_field {
 		
 		?>
 		<style>
+			/*
 			.acf-field .acf-label label[for="acf-<?php echo esc_attr($field['key']); ?>"] { display: none; }
+			*/
 			.acf-field .acf-input fieldset.acf-button {
 				border: 1px solid #eee;
 				padding: .5rem 1rem 1rem;

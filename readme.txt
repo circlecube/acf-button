@@ -43,7 +43,7 @@ This ACF field type is compatible with:
 == Changelog ==
 
 = 1.6.1 =
-* Include a missing asseet file.
+* Include a missing asset file.
 
 = 1.6 =
 * Combine all internal post types into one grouped select list.

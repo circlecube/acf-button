@@ -265,68 +265,70 @@ class acf_field_button extends acf_field {
 		
 		
 		//set defaults if values do not yet exist
-		if ( !isset( $field['value']['text'] ) ) {
-			if ( isset( $field['default_text'] ) ) {
-				$field['value']['text'] = $field['default_text'];
-			} else {
-				$field['value']['text'] = '';
+		if ( isset( $field['value'] ) ) {
+			if ( !isset( $field['value']['text'] ) ) {
+				if ( isset( $field['default_text'] ) && $field['default_text'] !== '' ) {
+					$field['value']['text'] = $field['default_text'];
+				} else {
+					$field['value']['text'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['page'] ) ) {
-			$field['value']['page'] = '';
-		}
-		if ( !isset( $field['value']['post'] ) ) {
-			$field['value']['post'] = '';
-		}
-		if ( !isset( $field['value']['media'] ) ) {
-			$field['value']['media'] = '';
-		}
-		if ( !isset( $field['value']['url'] ) ) {
-			if ( isset( $field['default_url'] ) ) {
-				$field['value']['url'] = $field['default_url'];
-			} else {
-				$field['value']['url'] = '';
+			if ( !isset( $field['value']['page'] ) ) {
+				$field['value']['page'] = '';
 			}
-		}
-		if ( !isset( $field['value']['target'] ) ) {
-			if ( isset( $field['default_target'] ) ) {
-				$field['value']['target'] = $field['default_target'];
-			} else {
-				$field['value']['target'] = '';
+			if ( !isset( $field['value']['post'] ) ) {
+				$field['value']['post'] = '';
 			}
-		}
-		if ( !isset( $field['value']['color'] ) ) {
-			if ( isset( $field['default_color'] ) ) {
-				$field['value']['color'] = $field['default_color'];
-			} else {
-				$field['value']['color'] = '';
+			if ( !isset( $field['value']['media'] ) ) {
+				$field['value']['media'] = '';
 			}
-		}
-		if ( !isset( $field['value']['size'] ) ) {
-			if ( isset( $field['default_size'] ) ) {
-				$field['value']['size'] = $field['default_size'];
-			} else {
-				$field['value']['size'] = '';
+			if ( !isset( $field['value']['url'] ) ) {
+				if ( isset( $field['default_url'] ) ) {
+					$field['value']['url'] = $field['default_url'];
+				} else {
+					$field['value']['url'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['style'] ) ) {
-			if ( isset( $field['default_style'] ) ) {
-				$field['value']['style'] = $field['default_style'];
-			} else {
-				$field['value']['style'] = '';
+			if ( !isset( $field['value']['target'] ) ) {
+				if ( isset( $field['default_target'] ) ) {
+					$field['value']['target'] = $field['default_target'];
+				} else {
+					$field['value']['target'] = '';
+				}
 			}
-		}
-		if ( !isset( $field['value']['class'] ) ) {
-			$field['value']['class'] = '';
-		}
-		if ( !isset( $field['value']['page_link'] ) ) {
-			$field['value']['page_link'] = '';
-		}
-		if ( !isset( $field['value']['type'] ) ) {
-			if ( isset( $field['default_type'] ) ) {
-				$field['value']['type'] = $field['default_type'];
-			} else {
-				$field['value']['type'] = 'page';
+			if ( !isset( $field['value']['color'] ) ) {
+				if ( isset( $field['default_color'] ) ) {
+					$field['value']['color'] = $field['default_color'];
+				} else {
+					$field['value']['color'] = '';
+				}
+			}
+			if ( !isset( $field['value']['size'] ) ) {
+				if ( isset( $field['default_size'] ) ) {
+					$field['value']['size'] = $field['default_size'];
+				} else {
+					$field['value']['size'] = '';
+				}
+			}
+			if ( !isset( $field['value']['style'] ) ) {
+				if ( isset( $field['default_style'] ) ) {
+					$field['value']['style'] = $field['default_style'];
+				} else {
+					$field['value']['style'] = '';
+				}
+			}
+			if ( !isset( $field['value']['class'] ) ) {
+				$field['value']['class'] = '';
+			}
+			if ( !isset( $field['value']['page_link'] ) ) {
+				$field['value']['page_link'] = '';
+			}
+			if ( !isset( $field['value']['type'] ) ) {
+				if ( isset( $field['default_type'] ) ) {
+					$field['value']['type'] = $field['default_type'];
+				} else {
+					$field['value']['type'] = 'page';
+				}
 			}
 		}
 		

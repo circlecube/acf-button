@@ -14,11 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'acf_field_button' ) ) :
 
 	/**
-	 * Class acf_field_button
+	 * Class ACF_Button_Field
 	 *
 	 * @package acf-button
 	 */
-	class acf_field_button extends acf_field {
+	class ACF_Button_Field extends acf_field {
 
 		/**
 		 *  Function __construct
@@ -808,7 +808,7 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 
 
 	// initializes.
-	new acf_field_button( $this->settings );
+	new ACF_Button_Field( $this->settings );
 
 
 	// class_exists check.

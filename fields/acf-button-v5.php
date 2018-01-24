@@ -354,7 +354,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			</div>
 		</div>
 
-		<?php if ( in_array( 'type', $field['allow_advanced'], true ) ) { ?>
+		<?php if ( 'type' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'type', $field['allow_advanced'], true ) ) { ?>
 
 		<?php } else { ?>
 			<style>
@@ -409,7 +411,7 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 				</div>
 			</div>
 			<?php
-			$posttypes = [];
+			$posttypes = array();
 			$ignore    = array(
 				'attachment',
 				'acf-field',
@@ -490,7 +492,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			</div>
 		</div>
 
-		<?php if ( in_array( 'color', $field['allow_advanced'], true ) ) { ?>
+		<?php if ( 'color' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'color', $field['allow_advanced'], true ) ) { ?>
 
 			<div class="acf-button-subfield acf-button-color">
 				<div class="acf-label">
@@ -557,7 +561,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[color]" value="<?php echo esc_attr( $field['value']['color'] ); ?>" />
 
-		<?php } if ( in_array( 'size', $field['allow_advanced'], true ) ) { ?>
+		<?php } if ( 'size' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'size', $field['allow_advanced'], true ) ) { ?>
 
 			<div class="acf-button-subfield acf-button-size">
 				<div class="acf-label">
@@ -610,7 +616,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[size]" value="<?php echo esc_attr( $field['value']['size'] ); ?>" />
 
-		<?php } if ( in_array( 'style', $field['allow_advanced'], true ) ) { ?>
+		<?php } if ( 'style' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'style', $field['allow_advanced'], true ) ) { ?>
 
 			<div class="acf-button-subfield acf-button-style">
 				<div class="acf-label">
@@ -663,7 +671,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[style]" value="<?php echo esc_attr( $field['value']['style'] ); ?>" />
 
-		<?php } if ( in_array( 'target', $field['allow_advanced'], true ) ) { ?>
+		<?php } if ( 'target' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'target', $field['allow_advanced'], true ) ) { ?>
 
 			<div class="acf-button-subfield acf-button-target">
 				<div class="acf-label">
@@ -689,7 +699,9 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		<?php } else { ?>
 			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[target]" value="<?php echo esc_attr( $field['value']['target'] ); ?>" />
 
-		<?php } if ( in_array( 'class', $field['allow_advanced'], true ) ) { ?>
+		<?php } if ( 'class' === $field['allow_advanced'] ||
+					is_array( $field['allow_advanced'] ) &&
+					in_array( 'class', $field['allow_advanced'], true ) ) { ?>
 
 			<div class="acf-button-subfield acf-button-class">
 				<div class="acf-label">

@@ -48,6 +48,7 @@ This ACF field type is compatible with:
 = 1.6.1 =
 * Include a missing asset files, since they were in the assets dir. Add thumbnail and banner assets.
 
+
 = 1.6 =
 
 * Combine all internal post types into one grouped select list.

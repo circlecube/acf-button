@@ -27,7 +27,8 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		 *
 		 *  @type    function
 		 *  @date    5/09/2016
-		 *  @since   5.0.0
+		 *  @since   1.0.0
+		 *  @since   1.7.0 Added rel and anchor to button options.
 		 *
 		 *  @param   $settings (array) the $settings array.
 		 *  @return  void
@@ -53,7 +54,6 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			*/
 			$this->defaults = array(
 				'default_text'   => '',
-				'default_url'    => '',
 				'allow_advanced' => array(
 					'type',
 					'target',
@@ -63,7 +63,7 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 				'default_color'  => 'primary',
 				'default_size'   => '',
 				'default_style'  => '',
-				'default_type'   => 'page',
+				'default_type'   => 'post',
 			);
 
 			/*
@@ -89,7 +89,8 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		 *  Create extra settings for your field. These are visible when editing a field
 		 *
 		 *  @type    action
-		 *  @since   3.6
+		 *  @since   1.0.0
+		 *  @since   1.7.0 Added rel and anchor to button options.
 		 *  @date    23/01/13
 		 *
 		 *  @param   $field (array) the $field being edited.
@@ -236,7 +237,8 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 		 *  Create the HTML interface for your field
 		 *
 		 *  @type    action
-		 *  @since   3.6
+		 *  @since   1.0.0
+		 *  @since   1.7.0 Added rel and anchor to button options.
 		 *  @date    23/01/13
 		 *
 		 *  @param   $field (array) the $field being rendered.
@@ -799,7 +801,8 @@ if ( 'rel' === $field['allow_advanced'] ||
 		 *  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
 		 *
 		 *  @type    filter
-		 *  @since   3.6
+		 *  @since   1.0.0
+		 *  @since   1.7.0 Added rel and anchor to button options.
 		 *  @date    23/01/13
 		 *
 		 *  @param type $value (mixed) the value which was loaded from the database.

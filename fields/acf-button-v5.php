@@ -321,26 +321,27 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			}
 
 			?>
-			<style>
-			.acf-field .acf-label label[for="acf-<?php echo esc_attr( $field['key'] ); ?>"] { display: none; }
-			.acf-field .acf-input fieldset.acf-button {
-				border: 1px solid #eee;
-				padding: .5rem 1rem 1rem;
-			}
-			.acf-button .acf-label {
-				margin-bottom: 5px;
-			}
-			.acf-button-subfield {
-				margin-top: 10px;
-			}
-			.acf-button .acf-input input {
-				line-height: 18px;
-			}
-		</style>
+<style>
+	.acf-field .acf-label label[for="acf-<?php echo esc_attr( $field['key'] ); ?>"] { 
+		display: none;
+	}
+	.acf-field .acf-input .acf-button fieldset {
+		border: 1px solid #eee;
+		padding: .5rem 1rem 1rem;
+	}
+	.acf-button .acf-label {
+		margin-bottom: 5px;
+	}
+	.acf-button-subfield {
+		margin-top: 10px;
+	}
+	.acf-button .acf-input input {
+		line-height: 18px;
+	}
+</style>
 <div class="acf-button" id="acf-<?php echo esc_attr( $field['key'] ); ?>" data-key="<?php echo esc_attr( $field['key'] ); ?>">
 	<fieldset>
 		<legend><?php echo esc_attr( $field['label'] ); ?></legend>
-		<!-- <div class="acf-label"><label><?php echo esc_attr( $field['label'] ); ?></label></div> -->		
 		<div class="acf-button-subfield acf-button-text">
 			<div class="acf-label">
 				<label for="<?php echo esc_attr( $field['name'] ); ?>_text">Text</label>
@@ -353,18 +354,13 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 				/>
 			</div>
 		</div>
+<?php
 
-		<?php if ( 'type' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'type', $field['allow_advanced'], true ) ) { ?>
-
-		<?php } else { ?>
-			<style>
-				#acf-<?php echo esc_attr( $field['key'] ); ?> .acf-button-subfield.acf-button-type {
-					display: none;
-				}
-			</style>
-		<?php } ?>
+// When button link type is allowed, display the ui for type.
+if ( 'type' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'type', $field['allow_advanced'], true ) ) {
+?>
 
 		<div class="acf-button-subfield acf-button-type">
 			<div class="acf-label">
@@ -492,237 +488,268 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			</div>
 		</div>
 
-		<?php if ( 'color' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'color', $field['allow_advanced'], true ) ) { ?>
+		<?php
+}
 
-			<div class="acf-button-subfield acf-button-color">
-				<div class="acf-label">
-					<label for="<?php echo esc_attr( $field['key'] ); ?>_color">Color</label>
-				</div>
-				<div class="acf-input">
-					<select 
-							name="<?php echo esc_attr( $field['name'] ); ?>[color]"
-							id="<?php echo esc_attr( $field['key'] ); ?>_color"
-					>
-						<option value="primary" 
-						<?php
-						if ( 'primary' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Primary</option>
-						<option value="secondary" 
-						<?php
-						if ( 'secondary' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Secondary</option>
-						<option value="success" 
-						<?php
-						if ( 'success' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Success</option>
-						<option value="alert" 
-						<?php
-						if ( 'alert' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Alert</option>
-						<option value="info" 
-						<?php
-						if ( 'info' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Info</option>
-						<option value="warning" 
-						<?php
-						if ( 'warning' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Warning</option>
-						<option value="disabled" 
-						<?php
-						if ( 'disabled' === $field['value']['color'] ) {
-							echo 'selected';
-						}
-						?>
-						>Disabled</option>
-					</select>
-				</div>
+// When button color is allowed, display the ui for color.
+if ( 'color' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'color', $field['allow_advanced'], true ) ) {
+?>
+
+		<div class="acf-button-subfield acf-button-color">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['key'] ); ?>_color">Color</label>
 			</div>
-
-		<?php } else { ?>
-			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[color]" value="<?php echo esc_attr( $field['value']['color'] ); ?>" />
-
-		<?php } if ( 'size' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'size', $field['allow_advanced'], true ) ) { ?>
-
-			<div class="acf-button-subfield acf-button-size">
-				<div class="acf-label">
-					<label for="<?php echo esc_attr( $field['name'] ); ?>[size]">Size</label>
-				</div>
-				<div class="acf-input">
-					<select 
-							name="<?php echo esc_attr( $field['name'] ); ?>[size]"
-							id="<?php echo esc_attr( $field['name'] ); ?>[size]"
-					>
-						<option value="tiny" 
-						<?php
-						if ( 'tiny' === $field['value']['size'] ) {
-							echo 'selected';
-						}
-						?>
-						>Tiny</option>
-						<option value="small" 
-						<?php
-						if ( 'small' === $field['value']['size'] ) {
-							echo 'selected';
-						}
-						?>
-						>Small</option>
-						<option value="" 
-						<?php
-						if ( '' === $field['value']['size'] ) {
-							echo 'selected';
-						}
-						?>
-						>Normal</option>
-						<option value="large" 
-						<?php
-						if ( 'large' === $field['value']['size'] ) {
-							echo 'selected';
-						}
-						?>
-						>Large</option>
-						<option value="huge" 
-						<?php
-						if ( 'huge' === $field['value']['size'] ) {
-							echo 'selected';
-						}
-						?>
-						>Huge</option>
-					</select>
-				</div>
+			<div class="acf-input">
+				<select 
+						name="<?php echo esc_attr( $field['name'] ); ?>[color]"
+						id="<?php echo esc_attr( $field['key'] ); ?>_color"
+				>
+					<option value="primary" 
+					<?php
+					if ( 'primary' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Primary</option>
+					<option value="secondary" 
+					<?php
+					if ( 'secondary' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Secondary</option>
+					<option value="success" 
+					<?php
+					if ( 'success' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Success</option>
+					<option value="alert" 
+					<?php
+					if ( 'alert' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Alert</option>
+					<option value="info" 
+					<?php
+					if ( 'info' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Info</option>
+					<option value="warning" 
+					<?php
+					if ( 'warning' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Warning</option>
+					<option value="disabled" 
+					<?php
+					if ( 'disabled' === $field['value']['color'] ) {
+						echo 'selected';
+					}
+					?>
+					>Disabled</option>
+				</select>
 			</div>
+		</div>
 
-		<?php } else { ?>
-			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[size]" value="<?php echo esc_attr( $field['value']['size'] ); ?>" />
+<?php
+// when color ui is not allowed, display hidden field to load in the default color from the field group.
+} else {
+?>
+		<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[color]" value="<?php echo esc_attr( $field['value']['color'] ); ?>" />
+<?php
+}
 
-		<?php } if ( 'style' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'style', $field['allow_advanced'], true ) ) { ?>
+// When button size is allowed, display the ui for size.
+if ( 'size' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'size', $field['allow_advanced'], true ) ) {
+		?>
 
-			<div class="acf-button-subfield acf-button-style">
-				<div class="acf-label">
-					<label for="<?php echo esc_attr( $field['name'] ); ?>[style]">Style</label>
-				</div>
-				<div class="acf-input">
-					<select
-							name="<?php echo esc_attr( $field['name'] ); ?>[style]"
-							id="<?php echo esc_attr( $field['name'] ); ?>[style]"
-					>
-						<option value="" 
-						<?php
-						if ( '' === $field['value']['style'] ) {
-							echo 'selected';
-						}
-						?>
-						>Normal</option>
-						<option value="extended" 
-						<?php
-						if ( 'extended' === $field['value']['style'] ) {
-							echo 'selected';
-						}
-						?>
-						>Extended</option>
-						<option value="hollow" 
-						<?php
-						if ( 'hollow' === $field['value']['style'] ) {
-							echo 'selected';
-						}
-						?>
-						>Hollow</option>
-						<option value="round" 
-						<?php
-						if ( 'round' === $field['value']['style'] ) {
-							echo 'selected';
-						}
-						?>
-						>Round</option>
-						<option value="radius" 
-						<?php
-						if ( 'radius' === $field['value']['style'] ) {
-							echo 'selected';
-						}
-						?>
-						>Radius</option>
-					</select>
-				</div>
+		<div class="acf-button-subfield acf-button-size">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[size]">Size</label>
 			</div>
-
-		<?php } else { ?>
-			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[style]" value="<?php echo esc_attr( $field['value']['style'] ); ?>" />
-
-		<?php } if ( 'target' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'target', $field['allow_advanced'], true ) ) { ?>
-
-			<div class="acf-button-subfield acf-button-target">
-				<div class="acf-label">
-					<label for="<?php echo esc_attr( $field['name'] ); ?>[target]">Target</label>
-				</div>
-				<div class="acf-input">
-					<select 
-							name="<?php echo esc_attr( $field['name'] ); ?>[target]"
-							id="<?php echo esc_attr( $field['name'] ); ?>[target]"
-					>
-						<option value="">Open in same window</option>
-						<option value="_blank" 
-						<?php
-						if ( '_blank' === $field['value']['target'] ) {
-							echo 'selected';}
-							?>
-							>Open in new window/tab (target="_blank")</option>
-					</select>
-				</div>
-
+			<div class="acf-input">
+				<select 
+						name="<?php echo esc_attr( $field['name'] ); ?>[size]"
+						id="<?php echo esc_attr( $field['name'] ); ?>[size]"
+				>
+					<option value="tiny" 
+					<?php
+					if ( 'tiny' === $field['value']['size'] ) {
+						echo 'selected';
+					}
+					?>
+					>Tiny</option>
+					<option value="small" 
+					<?php
+					if ( 'small' === $field['value']['size'] ) {
+						echo 'selected';
+					}
+					?>
+					>Small</option>
+					<option value="" 
+					<?php
+					if ( '' === $field['value']['size'] ) {
+						echo 'selected';
+					}
+					?>
+					>Normal</option>
+					<option value="large" 
+					<?php
+					if ( 'large' === $field['value']['size'] ) {
+						echo 'selected';
+					}
+					?>
+					>Large</option>
+					<option value="huge" 
+					<?php
+					if ( 'huge' === $field['value']['size'] ) {
+						echo 'selected';
+					}
+					?>
+					>Huge</option>
+				</select>
 			</div>
+		</div>
 
-		<?php } else { ?>
-			<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[target]" value="<?php echo esc_attr( $field['value']['target'] ); ?>" />
+<?php
+// when size ui is not allowed, add hidden field to store default size.
+} else {
+?>
+		<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[size]" value="<?php echo esc_attr( $field['value']['size'] ); ?>" />
+<?php
+}
 
-		<?php } if ( 'class' === $field['allow_advanced'] ||
-					is_array( $field['allow_advanced'] ) &&
-					in_array( 'class', $field['allow_advanced'], true ) ) { ?>
+// When button style is allowed, display the ui for style.
+if ( 'style' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'style', $field['allow_advanced'], true ) ) {
+?>
 
-			<div class="acf-button-subfield acf-button-class">
-				<div class="acf-label">
-					<label for="<?php echo esc_attr( $field['name'] ); ?>[class]">Custom Class(es)</label>
-				</div>
-				<div class="acf-input">
-					<input  type="text" 
-							name="<?php echo esc_attr( $field['name'] ); ?>[class]" 
-							id="<?php echo esc_attr( $field['name'] ); ?>[class]" 
-							value="<?php echo esc_attr( $field['value']['class'] ); ?>" 
-					/>
-				</div>
+		<div class="acf-button-subfield acf-button-style">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[style]">Style</label>
 			</div>
+			<div class="acf-input">
+				<select
+						name="<?php echo esc_attr( $field['name'] ); ?>[style]"
+						id="<?php echo esc_attr( $field['name'] ); ?>[style]"
+				>
+					<option value="" 
+					<?php
+					if ( '' === $field['value']['style'] ) {
+						echo 'selected';
+					}
+					?>
+					>Normal</option>
+					<option value="extended" 
+					<?php
+					if ( 'extended' === $field['value']['style'] ) {
+						echo 'selected';
+					}
+					?>
+					>Extended</option>
+					<option value="hollow" 
+					<?php
+					if ( 'hollow' === $field['value']['style'] ) {
+						echo 'selected';
+					}
+					?>
+					>Hollow</option>
+					<option value="round" 
+					<?php
+					if ( 'round' === $field['value']['style'] ) {
+						echo 'selected';
+					}
+					?>
+					>Round</option>
+					<option value="radius" 
+					<?php
+					if ( 'radius' === $field['value']['style'] ) {
+						echo 'selected';
+					}
+					?>
+					>Radius</option>
+				</select>
+			</div>
+		</div>
+<?php
+// when style ui is not allowed, load the defualt style in a hidden field.
+} else {
+?>
+		<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[style]" value="<?php echo esc_attr( $field['value']['style'] ); ?>" />
+<?php
+}
 
-		<?php } ?>
+// When button target is allowed, display the ui for target.
+if ( 'target' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'target', $field['allow_advanced'], true ) ) {
+?>
+
+		<div class="acf-button-subfield acf-button-target">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[target]">Target</label>
+			</div>
+			<div class="acf-input">
+				<select 
+						name="<?php echo esc_attr( $field['name'] ); ?>[target]"
+						id="<?php echo esc_attr( $field['name'] ); ?>[target]"
+				>
+					<option value="">Open in same window</option>
+					<option value="_blank" 
+					<?php
+					if ( '_blank' === $field['value']['target'] ) {
+						echo 'selected';}
+					?>
+					>Open in new window/tab (target="_blank")</option>
+				</select>
+			</div>
+		</div>
+
+<?php
+// if target ui is not allowed, add default to hidden field.
+} else {
+?>
+		<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[target]" value="<?php echo esc_attr( $field['value']['target'] ); ?>" />
+<?php
+}
+
+// When button class is allowed, display the ui for class.
+if ( 'class' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'class', $field['allow_advanced'], true ) ) {
+?>
+
+		<div class="acf-button-subfield acf-button-class">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[class]">Custom Class(es)</label>
+			</div>
+			<div class="acf-input">
+				<input  type="text" 
+						name="<?php echo esc_attr( $field['name'] ); ?>[class]" 
+						id="<?php echo esc_attr( $field['name'] ); ?>[class]" 
+						value="<?php echo esc_attr( $field['value']['class'] ); ?>" 
+				/>
+			</div>
+		</div>
+
+<?php } ?>
 
 	</fieldset>
 </div>
-			<?php
-
+<?php
 		}
+
 
 		/**
 		 * Function input_admin_enqueue_scripts()

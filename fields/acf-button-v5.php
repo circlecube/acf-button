@@ -119,6 +119,8 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 						'size'   => __( 'Size', 'acf-button' ),
 						'style'  => __( 'Style', 'acf-button' ),
 						'class'  => __( 'Class', 'acf-button' ),
+						'anchor' => __( 'Anchor', 'acf-button' ),
+						'rel'    => __( 'Relationship (rel attribute)', 'acf-button' ),
 					),
 				)
 			);
@@ -128,14 +130,6 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 					'label' => __( 'Default Button Text', 'acf-button' ),
 					'type'  => 'text',
 					'name'  => 'default_text',
-				)
-			);
-
-			acf_render_field_setting(
-				$field, array(
-					'label' => __( 'Default Button URL', 'acf-button' ),
-					'type'  => 'url',
-					'name'  => 'default_url',
 				)
 			);
 
@@ -262,21 +256,11 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 					$field['value']['text'] = '';
 				}
 			}
-			if ( ! isset( $field['value']['page'] ) ) {
-				$field['value']['page'] = '';
-			}
 			if ( ! isset( $field['value']['post'] ) ) {
 				$field['value']['post'] = '';
 			}
-			if ( ! isset( $field['value']['media'] ) ) {
-				$field['value']['media'] = '';
-			}
 			if ( ! isset( $field['value']['url'] ) ) {
-				if ( isset( $field['default_url'] ) ) {
-					$field['value']['url'] = $field['default_url'];
-				} else {
-					$field['value']['url'] = '';
-				}
+				$field['value']['url'] = '';
 			}
 			if ( ! isset( $field['value']['target'] ) ) {
 				if ( isset( $field['default_target'] ) ) {
@@ -309,6 +293,12 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 			if ( ! isset( $field['value']['class'] ) ) {
 				$field['value']['class'] = '';
 			}
+			if ( ! isset( $field['value']['anchor'] ) ) {
+				$field['value']['anchor'] = '';
+			}
+			if ( ! isset( $field['value']['rel'] ) ) {
+				$field['value']['rel'] = '';
+			}
 			if ( ! isset( $field['value']['page_link'] ) ) {
 				$field['value']['page_link'] = '';
 			}
@@ -316,7 +306,7 @@ if ( ! class_exists( 'acf_field_button' ) ) :
 				if ( isset( $field['default_type'] ) ) {
 					$field['value']['type'] = $field['default_type'];
 				} else {
-					$field['value']['type'] = 'page';
+					$field['value']['type'] = 'post';
 				}
 			}
 
@@ -406,7 +396,15 @@ if ( 'type' === $field['allow_advanced'] ||
 					<?php } ?>
 				</div>
 			</div>
-			<?php
+<?php
+}
+
+// When button link type is allowed, display the ui for type.
+if ( 'type' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'type', $field['allow_advanced'], true ) ||
+		'post' === $field['default_type'] ) {
+
 			$posttypes = array();
 			$ignore    = array(
 				'attachment',
@@ -422,74 +420,107 @@ if ( 'type' === $field['allow_advanced'] ||
 
 			?>
 			<div class="acf-button-subfield acf-button-post acf-button-link">
-			<div class="acf-label">
-				<label for="<?php echo esc_attr( $field['key'] ); ?>_post">Post Link</label>
-				<p class="description"></p>
-			</div>
-			<div class="acf-input">
-				<?php
-				$selected = esc_attr( $field['value']['post'] );
-
-				// query arguments.
-				$args = array(
-					'post_type'      => $posttypes,
-					'posts_per_page' => 100,
-					'order'          => 'ASC',
-					'orderby'        => 'type title',
-				);
-
-				$myposts = get_posts( $args );
-				?>
-				<select 
-						name="<?php echo esc_attr( $field['name'] ); ?>[post]"
-						id="<?php echo esc_attr( $field['key'] ); ?>_post"
-				>
-				<?php
-					$post_type = '';
-				foreach ( $myposts as $post ) {
-					$this_post_type = get_post_type( $post );
-
-					if ( $post_type !== $this_post_type ) {
-						if ( '' !== $post_type ) {
-							echo '</optgroup>';
-						}
-						$post_type = $this_post_type;
-						echo '<optgroup label="' . esc_attr( get_post_type_object( $post_type )->labels->name ) . '">';
-					}
-
-					$this_id    = $post->ID;
-					$this_title = get_the_title( $this_id );
-					?>
-					<option value="<?php echo esc_attr( $this_id ); ?>" 
-						<?php
-						if ( $field['value']['post'] === $this_id ) {
-							echo 'selected';
-						}
-						?>
-						><?php echo esc_html( $this_title ); ?></option>
+				<div class="acf-label">
+					<label for="<?php echo esc_attr( $field['key'] ); ?>_post">Content Link</label>
+					<p class="description"></p>
+				</div>
+				<div class="acf-input">
 					<?php
-				}
-				?>
-					</optgroup>
-				</select>
+					$selected = esc_attr( $field['value']['post'] );
+
+					// query arguments.
+					$args = array(
+						'post_type'      => $posttypes,
+						'posts_per_page' => -1,
+						'order'          => 'ASC',
+						'orderby'        => 'type title',
+					);
+
+					$myposts = get_posts( $args );
+					?>
+					<select 
+							name="<?php echo esc_attr( $field['name'] ); ?>[post]"
+							id="<?php echo esc_attr( $field['key'] ); ?>_post"
+					>
+					<?php
+						$post_type = '';
+					foreach ( $myposts as $post ) {
+						$this_post_type = get_post_type( $post );
+
+						if ( $post_type !== $this_post_type ) {
+							if ( '' !== $post_type ) {
+								echo '</optgroup>';
+							}
+							$post_type = $this_post_type;
+							echo '<optgroup label="' . esc_attr( get_post_type_object( $post_type )->labels->name ) . '">';
+						}
+
+						$this_id    = $post->ID;
+						$this_title = get_the_title( $this_id );
+						?>
+						<option value="<?php echo esc_attr( $this_id ); ?>" 
+							<?php
+							if ( $field['value']['post'] === $this_id ) {
+								echo 'selected';
+							}
+							?>
+							><?php echo esc_html( $this_title ); ?></option>
+						<?php
+					}
+					?>
+						</optgroup>
+					</select>
+				</div>
+			</div>
+<?php
+}
+
+// When button link type is allowed, display the ui for type.
+if ( 'type' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'type', $field['allow_advanced'], true ) ||
+		'custom' === $field['default_type'] ) {
+?>
+
+			<div class="acf-button-subfield acf-button-link acf-button-url">
+				<div class="acf-label">
+					<label for="<?php echo esc_attr( $field['key'] ); ?>_url">URL</label>
+				</div>
+				<div class="acf-input">
+					<input  type="url" 
+						name="<?php echo esc_attr( $field['name'] ); ?>[url]" 
+						id="<?php echo esc_attr( $field['key'] ); ?>_url" 
+						value="<?php echo esc_attr( $field['value']['url'] ); ?>" 
+					/>
 				</div>
 			</div>
 
-			<div class="acf-button-subfield acf-button-link acf-button-url">
+		<?php
+}
+
+// When button anchor is allowed, display the ui for anchor.
+if ( 'anchor' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'anchor', $field['allow_advanced'], true ) ) {
+?>
+
+		<div class="acf-button-subfield acf-button-anchor">
 			<div class="acf-label">
-				<label for="<?php echo esc_attr( $field['key'] ); ?>_url">URL</label>
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[anchor]">Anchor</label>
 			</div>
 			<div class="acf-input">
-				<input  type="url" 
-					name="<?php echo esc_attr( $field['name'] ); ?>[url]" 
-					id="<?php echo esc_attr( $field['key'] ); ?>_url" 
-					value="<?php echo esc_attr( $field['value']['url'] ); ?>" 
-				/>
+				<div class="acf-input-prepend">#</div>
+				<div class="acf-input-wrap">
+					<input  type="text" 
+							name="<?php echo esc_attr( $field['name'] ); ?>[anchor]" 
+							id="<?php echo esc_attr( $field['name'] ); ?>[anchor]" 
+							value="<?php echo esc_attr( $field['value']['anchor'] ); ?>" 
+					/>
+				</div>
 			</div>
 		</div>
 
-		<?php
-}
+<?php }
 
 // When button color is allowed, display the ui for color.
 if ( 'color' === $field['allow_advanced'] ||
@@ -563,7 +594,11 @@ if ( 'color' === $field['allow_advanced'] ||
 // when color ui is not allowed, display hidden field to load in the default color from the field group.
 } else {
 ?>
-		<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>[color]" value="<?php echo esc_attr( $field['value']['color'] ); ?>" />
+		<input
+			type="hidden"
+			name="<?php echo esc_attr( $field['name'] ); ?>[color]"
+			value="<?php echo esc_attr( $field['value']['color'] ); ?>"
+		/>
 <?php
 }
 
@@ -743,6 +778,27 @@ if ( 'class' === $field['allow_advanced'] ||
 			</div>
 		</div>
 
+<?php }
+
+// When button rel is allowed, display the ui for rel.
+if ( 'rel' === $field['allow_advanced'] ||
+		is_array( $field['allow_advanced'] ) &&
+		in_array( 'rel', $field['allow_advanced'], true ) ) {
+?>
+
+		<div class="acf-button-subfield acf-button-rel">
+			<div class="acf-label">
+				<label for="<?php echo esc_attr( $field['name'] ); ?>[rel]">Button link rel</label>
+			</div>
+			<div class="acf-input">
+				<input  type="text" 
+						name="<?php echo esc_attr( $field['name'] ); ?>[rel]" 
+						id="<?php echo esc_attr( $field['name'] ); ?>[rel]" 
+						value="<?php echo esc_attr( $field['value']['rel'] ); ?>" 
+				/>
+			</div>
+		</div>
+
 <?php } ?>
 
 	</fieldset>
@@ -801,6 +857,7 @@ if ( 'class' === $field['allow_advanced'] ||
 			// set defaults.
 			$url    = '';
 			$target = '';
+			$rel    = '';
 			$class  = 'button';
 			// get url - if url exists use it, if not use the page id to get permalink.
 			if ( 'custom' === $value['type'] ) {
@@ -814,6 +871,11 @@ if ( 'class' === $field['allow_advanced'] ||
 			if ( isset( $value['target'] ) &&
 			'_blank' === $value['target'] ) {
 				$target = ' target="_blank" ';
+			}
+
+			// get rel.
+			if ( isset( $value['rel'] ) ) {
+				$rel = ' rel="' . $value['rel'] . '" ';
 			}
 
 			// append size classes.
@@ -836,7 +898,19 @@ if ( 'class' === $field['allow_advanced'] ||
 				$class .= ' ' . $value['class'];
 			}
 
-			$value = '<a href="' . $url . '" class="' . $class . '"' . $target . '>' . $value['text'] . '</a>';
+			// append anchor.
+			if ( isset( $value['anchor'] ) ) {
+				$url .= '#' . $value['anchor'];
+			}
+
+			$value = '<a 
+						href="' . $url . '" 
+						class="' . $class . '"' . 
+						$target . 
+						$rel . 
+					'>' . 
+						$value['text'] . 
+					'</a>';
 
 			// return.
 			return $value;

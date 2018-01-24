@@ -533,59 +533,28 @@ if ( 'color' === $field['allow_advanced'] ||
 				<label for="<?php echo esc_attr( $field['key'] ); ?>_color">Color</label>
 			</div>
 			<div class="acf-input">
-				<select 
+			<?php
+				$color_values = array(
+					'Primary'   => 'primary',
+					'Secondary' => 'secondary',
+					'Success'   => 'success',
+					'Alert'     => 'alert',
+					'Info'      => 'info',
+					'Warning'   => 'warning',
+					'Disabled'  => 'disabled',
+				);
+			?>
+				<select
 						name="<?php echo esc_attr( $field['name'] ); ?>[color]"
-						id="<?php echo esc_attr( $field['key'] ); ?>_color"
+						id="<?php echo esc_attr( $field['name'] ); ?>[color]"
 				>
-					<option value="primary" 
-					<?php
-					if ( 'primary' === $field['value']['color'] ) {
+				<?php foreach ( $color_values as $key => $value ){ ?>
+					<option value="<?php echo esc_attr( $value ); ?>"
+					<?php if ( $value === $field['value']['color'] ) {
 						echo 'selected';
-					}
-					?>
-					>Primary</option>
-					<option value="secondary" 
-					<?php
-					if ( 'secondary' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Secondary</option>
-					<option value="success" 
-					<?php
-					if ( 'success' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Success</option>
-					<option value="alert" 
-					<?php
-					if ( 'alert' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Alert</option>
-					<option value="info" 
-					<?php
-					if ( 'info' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Info</option>
-					<option value="warning" 
-					<?php
-					if ( 'warning' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Warning</option>
-					<option value="disabled" 
-					<?php
-					if ( 'disabled' === $field['value']['color'] ) {
-						echo 'selected';
-					}
-					?>
-					>Disabled</option>
+					} ?>
+					><?php echo esc_html( $key ); ?></option>
+				<?php }	?>
 				</select>
 			</div>
 		</div>
@@ -613,45 +582,26 @@ if ( 'size' === $field['allow_advanced'] ||
 				<label for="<?php echo esc_attr( $field['name'] ); ?>[size]">Size</label>
 			</div>
 			<div class="acf-input">
-				<select 
+			<?php
+				$size_values = array(
+					'Tiny'   => 'tiny',
+					'Small'  => 'small',
+					'Normal' => '',
+					'Large'  => 'large',
+					'Huge'   => 'huge',
+				);
+			?>
+				<select
 						name="<?php echo esc_attr( $field['name'] ); ?>[size]"
 						id="<?php echo esc_attr( $field['name'] ); ?>[size]"
 				>
-					<option value="tiny" 
-					<?php
-					if ( 'tiny' === $field['value']['size'] ) {
+				<?php foreach ( $size_values as $key => $value ){ ?>
+					<option value="<?php echo esc_attr( $value ); ?>"
+					<?php if ( $value === $field['value']['size'] ) {
 						echo 'selected';
-					}
-					?>
-					>Tiny</option>
-					<option value="small" 
-					<?php
-					if ( 'small' === $field['value']['size'] ) {
-						echo 'selected';
-					}
-					?>
-					>Small</option>
-					<option value="" 
-					<?php
-					if ( '' === $field['value']['size'] ) {
-						echo 'selected';
-					}
-					?>
-					>Normal</option>
-					<option value="large" 
-					<?php
-					if ( 'large' === $field['value']['size'] ) {
-						echo 'selected';
-					}
-					?>
-					>Large</option>
-					<option value="huge" 
-					<?php
-					if ( 'huge' === $field['value']['size'] ) {
-						echo 'selected';
-					}
-					?>
-					>Huge</option>
+					} ?>
+					><?php echo esc_html( $key ); ?></option>
+				<?php }	?>
 				</select>
 			</div>
 		</div>
@@ -675,45 +625,26 @@ if ( 'style' === $field['allow_advanced'] ||
 				<label for="<?php echo esc_attr( $field['name'] ); ?>[style]">Style</label>
 			</div>
 			<div class="acf-input">
+			<?php
+				$style_values = array(
+					'Normal'   => '',
+					'Extended' => 'extended',
+					'Hollow'   => 'hollow',
+					'Round'    => 'round',
+					'Radius'   => 'radius',
+				);
+			?>
 				<select
 						name="<?php echo esc_attr( $field['name'] ); ?>[style]"
 						id="<?php echo esc_attr( $field['name'] ); ?>[style]"
 				>
-					<option value="" 
-					<?php
-					if ( '' === $field['value']['style'] ) {
+				<?php foreach ( $style_values as $key => $value ){ ?>
+					<option value="<?php echo esc_attr( $value ); ?>"
+					<?php if ( $value === $field['value']['style'] ) {
 						echo 'selected';
-					}
-					?>
-					>Normal</option>
-					<option value="extended" 
-					<?php
-					if ( 'extended' === $field['value']['style'] ) {
-						echo 'selected';
-					}
-					?>
-					>Extended</option>
-					<option value="hollow" 
-					<?php
-					if ( 'hollow' === $field['value']['style'] ) {
-						echo 'selected';
-					}
-					?>
-					>Hollow</option>
-					<option value="round" 
-					<?php
-					if ( 'round' === $field['value']['style'] ) {
-						echo 'selected';
-					}
-					?>
-					>Round</option>
-					<option value="radius" 
-					<?php
-					if ( 'radius' === $field['value']['style'] ) {
-						echo 'selected';
-					}
-					?>
-					>Radius</option>
+					} ?>
+					><?php echo esc_html( $key ); ?></option>
+				<?php }	?>
 				</select>
 			</div>
 		</div>
@@ -736,17 +667,23 @@ if ( 'target' === $field['allow_advanced'] ||
 				<label for="<?php echo esc_attr( $field['name'] ); ?>[target]">Target</label>
 			</div>
 			<div class="acf-input">
-				<select 
+			<?php
+				$target_values = array(
+					'Open in same window'   => '',
+					'Open in new window/tab (target="_blank")' => '_blank',
+				);
+			?>
+				<select
 						name="<?php echo esc_attr( $field['name'] ); ?>[target]"
 						id="<?php echo esc_attr( $field['name'] ); ?>[target]"
 				>
-					<option value="">Open in same window</option>
-					<option value="_blank" 
-					<?php
-					if ( '_blank' === $field['value']['target'] ) {
-						echo 'selected';}
-					?>
-					>Open in new window/tab (target="_blank")</option>
+				<?php foreach ( $target_values as $key => $value ){ ?>
+					<option value="<?php echo esc_attr( $value ); ?>"
+					<?php if ( $value === $field['value']['target'] ) {
+						echo 'selected';
+					} ?>
+					><?php echo esc_html( $key ); ?></option>
+				<?php }	?>
 				</select>
 			</div>
 		</div>
@@ -791,11 +728,37 @@ if ( 'rel' === $field['allow_advanced'] ||
 				<label for="<?php echo esc_attr( $field['name'] ); ?>[rel]">Button link rel</label>
 			</div>
 			<div class="acf-input">
-				<input  type="text" 
-						name="<?php echo esc_attr( $field['name'] ); ?>[rel]" 
-						id="<?php echo esc_attr( $field['name'] ); ?>[rel]" 
-						value="<?php echo esc_attr( $field['value']['rel'] ); ?>" 
-				/>
+			<?php
+				$rel_values = array(
+					'none'   => '',
+					'alternate' => 'alternate',
+					'author' => 'author',
+					'bookmark' => 'bookmark',
+					'external' => 'external',
+					'help' => 'help',
+					'license' => 'license',
+					'next' => 'next',
+					'nofollow' => 'nofollow',
+					'noreferrer' => 'noreferrer',
+					'prev' => 'prev',
+					'search' => 'search',
+					'tag' => 'tag',
+				);
+			?>
+				<select
+						name="<?php echo esc_attr( $field['name'] ); ?>[rel]"
+						id="<?php echo esc_attr( $field['name'] ); ?>[rel]"
+				>
+				
+				<?php foreach ( $rel_values as $key => $value ){ ?>
+					<option value="<?php echo esc_attr( $value ); ?>"
+					<?php if ( $value === $field['value']['rel'] ) {
+						echo 'selected';
+					} ?>
+					><?php echo esc_html( $key ); ?></option>
+				<?php }	?>
+					
+				</select>
 			</div>
 		</div>
 
